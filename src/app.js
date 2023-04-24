@@ -41,9 +41,18 @@ function displayTemperture(response){
     iconElement.setAttribute("alt", response.data.weather[0].description)
 }
 
-let apiKey = "c5f0e59acac64258bb92ed027d20c68f";
-let city = "Regina"
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function searchCity(city){
+    let apiKey = "c5f0e59acac64258bb92ed027d20c68f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayTemperture)
+}
 
-console.log(apiUrl);
-axios.get(apiUrl).then(displayTemperture)
+function search(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  searchCity(cityInputElement.value);
+}
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("sumit", search)
