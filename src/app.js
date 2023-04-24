@@ -21,6 +21,29 @@ function formatDate (timestamp){
     return `${day}  ${hours}:${minutes}`;
 }
 
+function displayForecast(){
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML = `<div class="row">`;
+    let days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+    days.forEach (function(day){
+            forecastHTML = forecastHTML + `
+              <div class="col">
+                <div class="forecast-date">${day}</div>
+                <img
+                  src="https://openweathermap.org/img/wn/04d@2x.png"
+                  alt="forecast icon"
+                  width="42"
+                />
+                <div class="forecast-temp">
+                  <span class="highTemp">18° </span> |<span class="lowTemp"
+                    >12°</span>
+                </div>             
+            </div>`;
+    });
+            forecastHTML = forecastHTML+`</div>`
+    forecastElement.innerHTML = forecastHTML
+    }
+
 function displayTemperture(response){
     let temperatureElement = document.querySelector("#temperature");
     let cityElement = document.querySelector("#city");
@@ -29,6 +52,8 @@ function displayTemperture(response){
     let windSpeedElement = document.querySelector("#wind-speed")
     let dateElement = document.querySelector("#date");
     let iconElement = document.querySelector("#icon");
+
+
 
     celsiusTemperature = response.data.main.temp;
 
@@ -83,3 +108,4 @@ let celsiusLink = document.querySelector("#celsius-link")
 celsiusLink.addEventListener("click", displayCelsiusTemperature)
 
 searchCity("Regina")
+displayForecast();
